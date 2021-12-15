@@ -1,64 +1,84 @@
-import React, {Component} from 'react';
+import React from 'react';
 import axios from 'axios';
-export class Login extends Component {
-  constructor() {
-    super();
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.state = {
-       Username: '',
-        Password: '',
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card'
+import {EditItem} from "./EditItem";
+
+export class Login extends React.Component {//Returns below text when called
+    constructor() {
+        super();
+        this.Login = this.Login.bind(this);
+        this.HandleUsername = this.HandleUsername.bind(this);
+        this.HandlePassword = this.HandlePassword.bind(this);
+
+        this.state = {
+            Username: '',
+            Password: '',
+        }
 
     }
 
-}
-  onChangeUsername(para) {
-    this.setState({
-        Username: para.target.value
-    })
-}
-onChangePassword(para) {
-    this.setState({
-        Password: para.target.value
-    })
-}
-Submit(para) {
-const LoginInfo={
-  Username:this.state.Username,
-  Password:this.state.Password,
+    HandleUsername(e) {
+        this.setState({
+            Username: e.target.value
+        })
+    }
 
-}
-axios.put('http://localhost:4000/api/logininfo/'+this.state.Username,LoginInfo).then((res)=>{
-console.log(res);//Server response
-})
-.catch((err)=>{
-console.log(err);//Server Error
-});
-}
-render() {
-return (
-  <div className='App'>
-     <h1>This is admin login </h1>
-  <form onSubmit={this.onSubmit}>
-    <div className='form-group'>
-      <label>
-        <p>Username</p>
-        <input type="text" className='form-control' value={this.state.Username} onChange={this.onChangeUsername}/>
-      </label>
-      </div>
-      <div className='form-group'>
-      <label>
-        <p>Password</p>
-        <input type="password"className='form-control' value={this.state.Password} onChange={this.onChangePassword} />
-      </label>
-      </div>
-      <div className='form-group'>
-        <button type="submit">Submit</button>
-      </div>
-      
-    </form>
-    </div>
-);
-}
+    HandlePassword(e) {
+        this.setState({
+            Password: e.target.value
+        })
+    }
+
+    Login(e) {
+        e.preventDefault();
+        const loginInfo = {
+            Username: this.state.Username,
+            Password: this.state.Password
+        }
+
+        axios.put('http://localhost:4000/Login/' + this.state.Username, loginInfo).then((res) => {
+            console.log(res.data);
+            if (res.data == "Login") {
+                window.sessionStorage.setItem("Admin", true);
+                alert("You are now loged in you may use add item,change stock")
+            } else {
+                alert(res.data);
+            }
+        })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    render() {
+
+        return (
+            <div className="container">
+
+                <h1>Login</h1>
+                <Card>
+                    <Card.Body>
+                        <form onSubmit={this.Login}>
+                            <div className='form-group'>
+                                <label>Username</label>
+                                <input type='text' className='form-control' value={this.state.Username}
+                                       onChange={this.HandleUsername}></input>
+                            </div>
+                            <div className='form-group'>
+                                <label>Password</label>
+                                <input type='text' className='form-control' value={this.state.Password}
+                                       onChange={this.HandlePassword}></input>
+                            </div>
+
+                            <br/>
+                            <div className='form-group'>
+                                <input type='submit' value='Login' className='btn btn-primary'></input>
+                            </div>
+                        </form>
+                    </Card.Body>
+                </Card>
+            </div>
+        );
+    }
 }

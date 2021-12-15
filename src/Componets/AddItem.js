@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {Navbar, Nav, Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Card from 'react-bootstrap/Card'
 export class AddItem extends React.Component {//Returns below text when called
     constructor() {
         super();
@@ -62,9 +61,20 @@ export class AddItem extends React.Component {//Returns below text when called
     }
 
     render() {
+        console.log(window.sessionStorage.getItem("Admin"));
+        if (window.sessionStorage.getItem("Admin")!="true"){
+            return(
+            <div>
+                <h1>You are not loged in</h1>
+            </div>
+            )
+        }
         return (
-            <div className="Container App">
+            <div className="container">
+
                 <h1>Add new item</h1>
+                <Card>
+                    <Card.Body>
                 <form onSubmit={this.Submit}>
                     <div className='form-group'>
                         <label>Item Name</label>
@@ -86,11 +96,13 @@ export class AddItem extends React.Component {//Returns below text when called
                         <input type='text' className='form-control' value={this.state.Image}
                                onChange={this.HandleImageChange}></input>
                     </div>
+                    <br/>
                     <div className='form-group'>
                         <input type='submit' value='Add Item' className='btn btn-primary'></input>
                     </div>
                 </form>
-
+                        </Card.Body>
+                    </Card>
             </div>
         );
     }

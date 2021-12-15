@@ -14,7 +14,7 @@ export class ItemEditCard extends React.Component {
         e.preventDefault();
         axios.delete('http://localhost:4000/items/' + this.props.item._id) //Sends to server Item id to delete
             .then(() => {
-                this.props.ReloadData();//Reloads data
+                this.props.ReloadRecords();//Reloads Records
             })
             .catch((error) => {
                 console.log(error + " error in delete")
@@ -39,6 +39,7 @@ export class ItemEditCard extends React.Component {
                         <Button variant="danger" onClick={this.DeleteItems}>Delete</Button>
                     </div>
                 </Card>
+                <br/>
 
 
             </div>

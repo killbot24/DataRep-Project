@@ -15,10 +15,11 @@ export class ShowCurrentItems extends React.Component {
         }
 
     }
+
     //On Componet load runs this.
     componentDidMount() {
-        if (this.state.Stock==0){
-            this.state.Name="test";
+        if (this.state.Stock == 0) {
+            this.state.Name = "test";
 
         }
         axios.put('http://localhost:4000/items/' + this.props.item._id)
@@ -32,50 +33,64 @@ export class ShowCurrentItems extends React.Component {
                 })
             })
             .catch((error) => {
-                console.log(error + " Error in mount")
-            }
+                    console.log(error + " Error in mount")
+                }
             );
     }
+
     //Removes 1 from record
     Buyone(e) {
+        //Sets new stock (Other wise only work's one time)
+        this.setState(
+            {
+                Stock: this.state.Stock - 1
+            }
+        )
         const newItem = {
             Name: this.state.Name,
             Price: this.state.Price,
-            Stock: this.state.Stock - 1,
+            Stock: this.state.Stock,
             Image: this.state.Image,
             _id: this.state._id
         }
-        axios.put('http://localhost:4000/items/' + this.state._id, newItem).then((res) => {
-            console.log(res);
+        console.log(this.state.Stock);
+        axios.put('http://localhost:4000/items/' + this.state._id, newItem).then(() => {
+            this.props.ReloadRecords();//Reloads records
         })
+            .catch((error) => {
+                console.log(error + " Error in buyone")
+            });
     }
 
     render() {
         //If stock is 0 do not render in homepage
-        {if (this.props.item.Stock==0){
-            return (
-                <div className="container"></div>
-            )
-        }else
-        return (
+        {
+            if (this.props.item.Stock == 0) {
+                return (
+                    <div className="container"></div>
+                )
+            } else
+                return (
 
-            <div class="container">
+                    <div class="container">
 
-                <Card>
-                    <Card.Body>
-                        <blockquote className="blockquote mb-0">
-                            <img src={this.props.item.Image} width="200" height="200"></img>
-                            <Card.Header><h4>{this.props.item.Name}</h4></Card.Header>
-                            <p>{this.props.item.Stock}</p>
-                            <p>$ {this.props.item.Price}</p>
-                        </blockquote>
-                    </Card.Body>
-                    <Button variant="danger" onClick={this.Buyone}>Buy 1</Button>
-                </Card>
+                        <Card>
+                            <Card.Body>
+                                <blockquote className="blockquote mb-0">
+                                    <img src={this.props.item.Image} width="200" height="200"></img>
+                                    <Card.Header><h4>{this.props.item.Name}</h4></Card.Header>
+                                    <p>{this.props.item.Stock}</p>
+                                    <p>$ {this.props.item.Price}</p>
+                                </blockquote>
+                            </Card.Body>
+                            <Button type="button" class="btn btn-dark" onClick={this.Buyone}>Buy 1</Button>
+                        </Card>
+                        <br/>
 
 
-            </div>
+                    </div>
 
-        );
-    }}
+                );
+        }
+    }
 }

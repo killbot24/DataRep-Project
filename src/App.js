@@ -13,7 +13,7 @@ import {HomePage} from './Componets/HomePage';
 import {AddItem} from './Componets/AddItem';
 import {changestock} from './Componets/changestock';
 import {EditItem} from './Componets/EditItem';
-
+import {Login} from "./Componets/Login";
 class App extends Component {
     render() {
         return (
@@ -24,6 +24,7 @@ class App extends Component {
                         <Container>
                             <Navbar.Brand href="/">Shop</Navbar.Brand>
                             <Nav className="me-auto">
+                                <Nav.Link href="/Login">Login</Nav.Link>
                                 <Nav.Link href="/AddItem">Add Item</Nav.Link>
                                 <Nav.Link href="/changestock">Change Stock</Nav.Link>
 
@@ -35,6 +36,7 @@ class App extends Component {
                         <Route path='/' component={HomePage} exact/>
                         <Route path='/AddItem' component={AddItem} exact/>
                         <Route path='/changestock' component={changestock} exact/>
+                        <Route path='/Login' component={Login} exact/>
                         <Route path='/EditItem/:id' component={EditItem} exact/>
                     </Switch>
 

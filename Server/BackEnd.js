@@ -6,7 +6,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
-const {debug} = require('console');
 
 app.use(cors());
 app.use(function (req, res, next) {
@@ -35,13 +34,20 @@ var ItemSchema = new Schema({
     Image: String
 
 })
+
+var LoginSchema = new Schema({
+    Username: String,
+    Password: String
+
+})
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 //Makes Schemea's into models
 var ItemModel = mongoose.model('items', ItemSchema);
+var LoginModel = mongoose.model('login', LoginSchema);
 //Deletes record with this id
-app.delete('/items/:id',(req,res)=>{
-    ItemModel.findByIdAndDelete(req.params.id,(err,data)=>{
+app.delete('/items/:id', (req, res) => {
+    ItemModel.findByIdAndDelete(req.params.id, (err, data) => {
         res.send(data);
     })
 })
@@ -64,6 +70,25 @@ app.put('/items/:id', (req, res) => {
         })
 
 })
+//Finds and checks login
+app.put('/Login/:username', (req, res) => {
+    LoginModel.find({Username: "Admin"}, function (err, docs) {//Finds record with
+        //Sorts through json to find password, Spiting down the json multi times and checking against password
+        var StringJson = JSON.stringify(docs);
+        const myArray = StringJson.split(",");
+        const Split1 = myArray[2].split(":");
+        const Split2 = Split1[1].split("}]");
+
+        if (Split2[0].replace(/["]+/g, "") == req.body.Password) {
+            res.send("Login");
+
+        } else {
+            res.send("Please make sure your info is correct");
+        }
+    });
+
+})
+
 //Gets all from the database for Items
 app.get('/items', (req, res, next) => {//Gets data from database
     ItemModel.find(function (err, data) {
