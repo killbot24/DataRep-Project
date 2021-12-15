@@ -17,6 +17,9 @@ export class HomePage extends Component {
         axios.get('http://localhost:4000/items')
             .then(
                 (response) => {
+                  //  console.log(Object.keys(response.data).length);
+                  // var json= response.data[Object.keys(response.data).length-1];
+
                     this.setState({items: response.data})
 
                 })
@@ -29,10 +32,13 @@ export class HomePage extends Component {
     }
 
     render() {
-        return <div className="Container">
+        return(
+            <div className="Container">
 
             <h1>What we currently have in store</h1>
+
             <ItemsgetView items={this.state.items}></ItemsgetView>
-        </div>
+        </div>)
+
     }
 }

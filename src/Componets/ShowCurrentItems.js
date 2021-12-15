@@ -15,8 +15,12 @@ export class ShowCurrentItems extends React.Component {
         }
 
     }
-
+    //On Componet load runs this.
     componentDidMount() {
+        if (this.state.Stock==0){
+            this.state.Name="test";
+
+        }
         axios.put('http://localhost:4000/items/' + this.props.item._id)
             .then(response => {
                 this.setState({
@@ -29,9 +33,10 @@ export class ShowCurrentItems extends React.Component {
             })
             .catch((error) => {
                 console.log(error + " Error in mount")
-            });//Shows error
+            }
+            );
     }
-
+    //Removes 1 from record
     Buyone(e) {
         const newItem = {
             Name: this.state.Name,
@@ -46,7 +51,14 @@ export class ShowCurrentItems extends React.Component {
     }
 
     render() {
+        //If stock is 0 do not render in homepage
+        {if (this.props.item.Stock==0){
+            return (
+                <div className="container"></div>
+            )
+        }else
         return (
+
             <div class="container">
 
                 <Card>
@@ -65,5 +77,5 @@ export class ShowCurrentItems extends React.Component {
             </div>
 
         );
-    }
+    }}
 }
