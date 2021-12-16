@@ -18,11 +18,7 @@ export class ShowCurrentItems extends React.Component {
 
     //On Componet load runs this.
     componentDidMount() {
-        if (this.state.Stock == 0) {
-            this.state.Name = "test";
-
-        }
-        axios.put('http://localhost:4000/items/' + this.props.item._id)
+        axios.put('http://localhost:4000/items/' + this.props.item._id) //Gets info from server saves it
             .then(response => {
                 this.setState({
                     _id: response.data._id,
@@ -54,7 +50,7 @@ export class ShowCurrentItems extends React.Component {
             _id: this.state._id
         }
         console.log(this.state.Stock);
-        axios.put('http://localhost:4000/items/' + this.state._id, newItem).then(() => {
+        axios.put('http://localhost:4000/items/' + this.state._id, newItem).then(() => { //Sends info to server
             this.props.ReloadRecords();//Reloads records
         })
             .catch((error) => {

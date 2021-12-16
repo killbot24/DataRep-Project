@@ -8,13 +8,13 @@ export class HomePage extends Component {
         super();
         this.ReloadRecords = this.ReloadRecords.bind(this);
     }
-
+    //Stores item info
     state = {
         items: []
 
     };
-
-    componentDidMount() {
+    //Runs of page load
+    componentDidMount() { //Gets info from server
         axios.get('http://localhost:4000/items')
             .then(
                 (response) => {

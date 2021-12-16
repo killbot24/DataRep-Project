@@ -42,7 +42,7 @@ export class Login extends React.Component {
         axios.put('http://localhost:4000/Login/' + this.state.Username, loginInfo).then((res) => {
             console.log(res.data);
             if (res.data == "Login") {//If login is successful
-                window.sessionStorage.setItem("Admin", true);
+                window.sessionStorage.setItem("Admin", true);//Sets admin to true allowing user to access add item and change stock
                 alert("You are now loged in you may use add item,change stock")
             } else { //Login failed
                 alert(res.data);
