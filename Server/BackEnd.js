@@ -54,6 +54,7 @@ app.post('/additem', (req, res) => {
         Stock: req.body.Stock,
         Image: req.body.Image
     });
+    res.send('Item added');
 })
 //Finds record by id and updates it with the new info
 app.put('/items/:id', (req, res) => {

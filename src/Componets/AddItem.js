@@ -58,7 +58,7 @@ export class AddItem extends React.Component {
             Image: this.state.Image
         }
         axios.post('http://localhost:4000/additem', newItem).then((res) => {
-            console.log(res);
+            alert(res.data)
         })
             .catch((err) => {
                 console.log(err);
