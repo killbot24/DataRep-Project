@@ -84,7 +84,7 @@ export class EditItem extends React.Component {
 
     render() {
         return (
-            <div className='App'>
+            <div className='container App'>
                 <h1>Edit Item</h1>
                 <form onSubmit={this.Submit}>
                     <div className='form-group'>
