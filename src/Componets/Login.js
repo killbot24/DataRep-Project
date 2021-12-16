@@ -2,9 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card'
-import {EditItem} from "./EditItem";
 
-export class Login extends React.Component {//Returns below text when called
+export class Login extends React.Component {
     constructor() {
         super();
         this.Login = this.Login.bind(this);
@@ -18,18 +17,21 @@ export class Login extends React.Component {//Returns below text when called
 
     }
 
+    //Takes in username
     HandleUsername(e) {
         this.setState({
             Username: e.target.value
         })
     }
 
+    //Takes in password
     HandlePassword(e) {
         this.setState({
             Password: e.target.value
         })
     }
 
+    //Sends login info to server
     Login(e) {
         e.preventDefault();
         const loginInfo = {
@@ -39,10 +41,10 @@ export class Login extends React.Component {//Returns below text when called
 
         axios.put('http://localhost:4000/Login/' + this.state.Username, loginInfo).then((res) => {
             console.log(res.data);
-            if (res.data == "Login") {
+            if (res.data == "Login") {//If login is successful
                 window.sessionStorage.setItem("Admin", true);
                 alert("You are now loged in you may use add item,change stock")
-            } else {
+            } else { //Login failed
                 alert(res.data);
             }
         })

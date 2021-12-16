@@ -10,9 +10,9 @@ export class ItemEditCard extends React.Component {
         this.DeleteItems = this.DeleteItems.bind(this);
     }
 
-    DeleteItems(e) {
+    DeleteItems(e) { //Sends id to be deleted
         e.preventDefault();
-        axios.delete('http://localhost:4000/items/' + this.props.item._id) //Sends to server Item id to delete
+        axios.delete('http://localhost:4000/items/' + this.props.item._id)
             .then(() => {
                 this.props.ReloadRecords();//Reloads Records
             })
@@ -21,7 +21,7 @@ export class ItemEditCard extends React.Component {
             });
     }
 
-    render() {
+    render() { //Lists out record in card
         return (
             <div class="container">
 

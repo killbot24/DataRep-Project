@@ -63,7 +63,7 @@ export class EditItem extends React.Component {
         })
     }
 
-    //Called on Submit
+    //Called on AddItem
     Submit(e) {
         e.preventDefault();
         const newItem = {

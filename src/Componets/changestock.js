@@ -26,7 +26,6 @@ export class changestock extends React.Component {
     }
     render() {
         //Checks if user is logged in
-        console.log(window.sessionStorage.getItem("Admin"));
         if (window.sessionStorage.getItem("Admin")!="true"){
             return(
                 <div>
