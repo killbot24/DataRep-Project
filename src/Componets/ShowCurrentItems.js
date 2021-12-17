@@ -35,7 +35,7 @@ export class ShowCurrentItems extends React.Component {
     }
 
     //Removes 1 from record
-    Buyone(e) {
+    Buyone() {
         //Sets new stock (Other wise only work's one time)
         this.setState(
             {

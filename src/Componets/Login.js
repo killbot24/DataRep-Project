@@ -7,8 +7,8 @@ export class Login extends React.Component {
     constructor() {
         super();
         this.Login = this.Login.bind(this);
-        this.HandleUsername = this.HandleUsername.bind(this);
-        this.HandlePassword = this.HandlePassword.bind(this);
+        this.HandleUsernameChange = this.HandleUsernameChange.bind(this);
+        this.HandlePasswordChange = this.HandlePasswordChange.bind(this);
 
         this.state = {
             Username: '',
@@ -18,22 +18,22 @@ export class Login extends React.Component {
     }
 
     //Takes in username
-    HandleUsername(e) {
+    HandleUsernameChange(event) {
         this.setState({
-            Username: e.target.value
+            Username: event.target.value
         })
     }
 
     //Takes in password
-    HandlePassword(e) {
+    HandlePasswordChange(event) {
         this.setState({
-            Password: e.target.value
+            Password: event.target.value
         })
     }
 
     //Sends login info to server
-    Login(e) {
-        e.preventDefault();
+    Login(event) {
+        event.preventDefault();
         const loginInfo = {
             Username: this.state.Username,
             Password: this.state.Password
@@ -65,12 +65,12 @@ export class Login extends React.Component {
                             <div className='form-group'>
                                 <label>Username</label>
                                 <input type='text' className='form-control' value={this.state.Username}
-                                       onChange={this.HandleUsername}></input>
+                                       onChange={this.HandleUsernameChange}></input>
                             </div>
                             <div className='form-group'>
                                 <label>Password</label>
                                 <input type='text' className='form-control' value={this.state.Password}
-                                       onChange={this.HandlePassword}></input>
+                                       onChange={this.HandlePasswordChange}></input>
                             </div>
 
                             <br/>

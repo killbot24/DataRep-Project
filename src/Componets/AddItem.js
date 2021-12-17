@@ -21,36 +21,37 @@ export class AddItem extends React.Component {
     }
 
     //Updates name
-    HandleNameChange(e) {
+    HandleNameChange(event) {
         this.setState({
-            Name: e.target.value
+            Name: event.target.value
         })
     }
 
     //Updates price
-    HandlePriceChange(e) {
+    HandlePriceChange(event) {
         this.setState({
-            Price: e.target.value
+            Price: event.target.value
         })
     }
 
     //Updates Stock
-    HandleStockChange(e) {
+    HandleStockChange(event) {
         this.setState({
-            Stock: e.target.value
+            Stock: event.target.value
         })
     }
 
     //Updates image
-    HandleImageChange(e) {
+    HandleImageChange(event) {
         this.setState({
-            Image: e.target.value
+            Image: event.target.value
+
         })
     }
 
     //Sends new item info to server
-    AddItem(e) {
-        e.preventDefault();
+    AddItem(event) {
+        event.preventDefault();
         const newItem = {
             Name: this.state.Name,
             Price: this.state.Price,

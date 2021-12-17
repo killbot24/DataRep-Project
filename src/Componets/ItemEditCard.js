@@ -10,8 +10,8 @@ export class ItemEditCard extends React.Component {
         this.DeleteItems = this.DeleteItems.bind(this);
     }
 
-    DeleteItems(e) { //Sends id to be deleted
-        e.preventDefault();
+    DeleteItems(event) { //Sends id to be deleted
+        event.preventDefault();
         axios.delete('http://localhost:4000/items/' + this.props.item._id)
             .then(() => {
                 this.props.ReloadRecords();//Reloads Records

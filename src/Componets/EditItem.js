@@ -36,36 +36,36 @@ export class EditItem extends React.Component {
     }
 
     //Called on change of value
-    HandleNameChange(e) {
+    HandleNameChange(event) {
         this.setState({
-            Name: e.target.value
+            Name: event.target.value
         })
     }
 
     //Called on change of value
-    HandlePriceChange(e) {
+    HandlePriceChange(event) {
         this.setState({
-            Price: e.target.value
+            Price: event.target.value
         })
     }
 
     //Called on change of value
-    HandleStockChange(e) {
+    HandleStockChange(event) {
         this.setState({
-            Stock: e.target.value
+            Stock: event.target.value
         })
     }
 
     //Called on change of value
-    HandleImagechange(e) {
+    HandleImagechange(event) {
         this.setState({
-            Image: e.target.value
+            Image: event.target.value
         })
     }
 
     //Called on AddItem
-    Submit(e) {
-        e.preventDefault();
+    Submit(event) {
+        event.preventDefault();
         const newItem = {
             Name: this.state.Name,
             Price: this.state.Price,
@@ -73,7 +73,7 @@ export class EditItem extends React.Component {
             Image: this.state.Image,
             _id: this.state._id
         }
-        axios.put('http://localhost:4000/items/' + this.state._id, newItem).then((res) => {
+        axios.put('http://localhost:4000/items/' + this.state._id, newItem).then((res) => { //Sends item id and new info
             console.log(res);
             alert("Item changed!");
         })

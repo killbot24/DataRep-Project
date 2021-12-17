@@ -28,7 +28,7 @@ var ItemSchema = new Schema({
     Image: String
 
 })
-
+//Login schema
 var LoginSchema = new Schema({
     Username: String,
     Password: String
@@ -91,7 +91,7 @@ app.get('/items', (req, res, next) => {//Gets data from database
         res.json(data);
     });
 })
-app.get('*', (req,res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/../build/index.html'));
 })
 app.listen(port, () => {//Sets up listen
